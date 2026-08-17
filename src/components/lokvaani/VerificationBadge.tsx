@@ -14,7 +14,7 @@ export function VerificationBadge({ verified }: { verified: boolean }) {
 
 export function DemoBadge({ label = "Demo Content" }: { label?: string }) {
   return (
-    <span className="eyebrow inline-flex items-center rounded-full border border-gold/50 bg-gold/15 px-2.5 py-1 text-gold-foreground">
+    <span className="eyebrow inline-flex items-center rounded-full border border-gold/60 bg-background/85 px-2.5 py-1 text-gold-foreground backdrop-blur-sm">
       {label}
     </span>
   );
