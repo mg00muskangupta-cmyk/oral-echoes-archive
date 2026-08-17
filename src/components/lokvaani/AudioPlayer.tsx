@@ -16,8 +16,8 @@ export function AudioPlayer({
   compact?: boolean;
   className?: string;
 }) {
-  const [m, s] = duration.split(":").map(Number);
-  const total = m * 60 + s;
+  const parts = duration.split(":").map(Number);
+  const total = (parts[0] ?? 0) * 60 + (parts[1] ?? 0);
   const [playing, setPlaying] = useState(false);
   const [pos, setPos] = useState(0);
   const [speed, setSpeed] = useState(1);

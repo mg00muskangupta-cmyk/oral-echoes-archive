@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { regions } from "@/data/archive";
+import { regions, type Region } from "@/data/archive";
 
 export function IndiaMap() {
-  const [active, setActive] = useState(regions[0]);
+  const [active, setActive] = useState<Region>(regions[0]!);
 
   return (
     <div className="grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
