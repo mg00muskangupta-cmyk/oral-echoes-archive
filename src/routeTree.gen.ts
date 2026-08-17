@@ -10,12 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContributeRouteImport } from './routes/contribute'
 import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as FolkSongsRouteImport } from './routes/folk-songs'
+import { Route as RegionsRouteImport } from './routes/regions'
+import { Route as StoriesIndexRouteImport } from './routes/stories/index'
+import { Route as StoriesSlugRouteImport } from './routes/stories/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContributeRoute = ContributeRouteImport.update({
@@ -28,35 +38,100 @@ const ExploreRoute = ExploreRouteImport.update({
   path: '/explore',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FolkSongsRoute = FolkSongsRouteImport.update({
+  id: '/folk-songs',
+  path: '/folk-songs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegionsRoute = RegionsRouteImport.update({
+  id: '/regions',
+  path: '/regions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoriesIndexRoute = StoriesIndexRouteImport.update({
+  id: '/stories/',
+  path: '/stories/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoriesSlugRoute = StoriesSlugRouteImport.update({
+  id: '/stories/$slug',
+  path: '/stories/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/contribute': typeof ContributeRoute
   '/explore': typeof ExploreRoute
+  '/folk-songs': typeof FolkSongsRoute
+  '/regions': typeof RegionsRoute
+  '/stories/$slug': typeof StoriesSlugRoute
+  '/stories/': typeof StoriesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/contribute': typeof ContributeRoute
   '/explore': typeof ExploreRoute
+  '/folk-songs': typeof FolkSongsRoute
+  '/regions': typeof RegionsRoute
+  '/stories/$slug': typeof StoriesSlugRoute
+  '/stories': typeof StoriesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/contribute': typeof ContributeRoute
   '/explore': typeof ExploreRoute
+  '/folk-songs': typeof FolkSongsRoute
+  '/regions': typeof RegionsRoute
+  '/stories/$slug': typeof StoriesSlugRoute
+  '/stories/': typeof StoriesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contribute' | '/explore'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contribute'
+    | '/explore'
+    | '/folk-songs'
+    | '/regions'
+    | '/stories/$slug'
+    | '/stories/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contribute' | '/explore'
-  id: '__root__' | '/' | '/contribute' | '/explore'
+  to:
+    | '/'
+    | '/about'
+    | '/contribute'
+    | '/explore'
+    | '/folk-songs'
+    | '/regions'
+    | '/stories/$slug'
+    | '/stories'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contribute'
+    | '/explore'
+    | '/folk-songs'
+    | '/regions'
+    | '/stories/$slug'
+    | '/stories/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   ContributeRoute: typeof ContributeRoute
   ExploreRoute: typeof ExploreRoute
+  FolkSongsRoute: typeof FolkSongsRoute
+  RegionsRoute: typeof RegionsRoute
+  StoriesSlugRoute: typeof StoriesSlugRoute
+  StoriesIndexRoute: typeof StoriesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -66,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contribute': {
@@ -82,13 +164,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExploreRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/folk-songs': {
+      id: '/folk-songs'
+      path: '/folk-songs'
+      fullPath: '/folk-songs'
+      preLoaderRoute: typeof FolkSongsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/regions': {
+      id: '/regions'
+      path: '/regions'
+      fullPath: '/regions'
+      preLoaderRoute: typeof RegionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stories/': {
+      id: '/stories/'
+      path: '/stories'
+      fullPath: '/stories/'
+      preLoaderRoute: typeof StoriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stories/$slug': {
+      id: '/stories/$slug'
+      path: '/stories/$slug'
+      fullPath: '/stories/$slug'
+      preLoaderRoute: typeof StoriesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   ContributeRoute: ContributeRoute,
   ExploreRoute: ExploreRoute,
+  FolkSongsRoute: FolkSongsRoute,
+  RegionsRoute: RegionsRoute,
+  StoriesSlugRoute: StoriesSlugRoute,
+  StoriesIndexRoute: StoriesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
